@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>isPrime timed</title>
+        <!-- Note the script tag here as well as the "text/javascript" -->
+        <!-- When we write JavaScript in HTML, it must be contained within a <script> tag. -->
+        <script type="text/javascript" src="script.js">
+        </script>
+    </head>
+    <body>
+        <output id="primeOutput01">
+        </output>
+        <output id="primeOutput02">
+        </output>
+
+        <script type="text/javascript">
+            function checkIntegersUpTo(myLimit) {
+                let firstPrimeOutputAlready = false;
+                for (let i = 1; i <= myLimit; i++) {
+                    let isPrime = isPrimeFunc(i);
+                    // output prime
+                    if (isPrime && firstPrimeOutputAlready) {
+                        primeOutput.value = primeOutput.value + ", " + i;
+                    } else if (isPrime) {
+                        primeOutput.value = "" + i;
+                        firstPrimeOutputAlready = true;
+                    }
+                }
+            }
+
+            function timedPrimeFinder() {
+                let timeStart = new Date().getTime();
+                checkIntegersUpTo(1000);
+                let timeEnd = new Date().getTime();
+                let timeElapsed = timeEnd - timeStart; // ms
+                let pElem = document.createElement("p");
+                pElem.textContent ="Elapsed time in = " + timeElapsed + " ms.";
+                primeOutput.appendChild(pElem);
+            }
+
+            const isPrimeFunc = getIsPrimeFunc();
+            let primeOutput = document.getElementById("primeOutput01");
+            
+            // Run first time
+            timedPrimeFinder();
+
+            // Run second time
+            primeOutput = document.getElementById("primeOutput02");
+            timedPrimeFinder();
+        </script>
+    </body>
+</html>

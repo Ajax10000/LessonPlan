@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Polynomial</title>
+        <!-- Note the script tag here as well as the "text/javascript" -->
+        <!-- When we write JavaScript in HTML, it must be contained within a <script> tag. -->
+        <script type="text/javascript" src="script.js">
+        </script>
+    </head>
+    <body>
+        <output id="polyOutput">
+        </output>
+
+        <script type="text/javascript">
+            // Create a polynomial object
+            const poly01 = getPolynomialObject([1, -1, 3]); // = 1 - x + 3x^2
+            // Get some of its properties
+            const coeffs = poly01.getCoeffs();
+            // For bonus, call getDisplayPolynomial method here
+
+            const vPlus = poly01.getVPlus(); // vPlus = 2
+            const vMinus = poly01.getVMinus(); // p(-x) = 1 + x + 3x^2, so vMinus = 0
+            
+            // Display the polynomial properties in the output element
+            const outputElem = document.getElementById("polyOutput");
+            // For bonus, display return value of getDisplayPolynomial here
+            outputElem.innerHTML = "Polynomial coefficients = " + coeffs + "<br />" + 
+                "vPlus = " + vPlus + "<br />" +
+                "vMinus = " + vMinus;
+        </script>
+    </body>
+</html>

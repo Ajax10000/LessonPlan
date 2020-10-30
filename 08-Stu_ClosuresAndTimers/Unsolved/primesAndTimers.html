@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Primes and Timers</title>
+        <!-- Note the script tag here as well as the "text/javascript" -->
+        <!-- When we write JavaScript in HTML, it must be contained within a <script> tag. -->
+        <script type="text/javascript" src="script.js">
+        </script>
+    </head>
+    <body>
+        <output id="primeOutput" style="width: 50%; text-align: float-left;">
+        </output>
+
+        <script type="text/javascript">
+            const primeOutput = document.getElementById("primeOutput");
+            const isPrimeFunc = getIsPrimeFunc();
+            let firstPrimeOutputAlready = false;
+
+            // This function will try to check to see if all integers from 
+            // myLowerLimit to myUpperLimit are primes. 
+            function checkIntegersFromTo(myLowerLimit, myUpperLimit) {
+                if (!Number.isInteger(myLowerLimit)) {
+                    let errMsg = "First parameter must be an integer";
+                    console.log(errMsg);
+                    throw new Exception(errMsg);
+                }
+                if (!Number.isInteger(myUpperLimit)) {
+                    let errMsg = "Second parameter must be an integer";
+                    console.log(errMsg);
+                    throw new Exception(errMsg);
+                }
+
+                let i;
+                for (i = myLowerLimit; i <= myUpperLimit; i++) {
+                    let isPrime = isPrimeFunc(i);
+                    // output prime
+                    if (isPrime && firstPrimeOutputAlready) {
+                        primeOutput.value = primeOutput.value + ", " + i;
+                    } else if (isPrime) {
+                        primeOutput.value = "" + i;
+                        firstPrimeOutputAlready = true;
+                    }
+                }
+            } 
+
+            function callNoBlockPrimeFinder(myLowerLimit, myUpperLimit) {
+                // This setTimeout will place its first argument (a function) 
+                // into the event queue. 
+                setTimeout(function() {
+                    checkIntegersFromTo(myLowerLimit, myUpperLimit);
+                    }, 0);
+            } 
+
+            callNoBlockPrimeFinder(1, 5000);
+        </script>
+    </body>
+</html>
